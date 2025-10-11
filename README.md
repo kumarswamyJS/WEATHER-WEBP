@@ -45,7 +45,7 @@ The app uses [WeatherAPI.com](https://www.weatherapi.com/) for fetching weather 
 
 Developed by Kumarswamy JS.  
 - Email: kumarswamyjs@example.com  
-- GitHub: [yourusername](https://github.com/yourusername)  
-- LinkedIn: [kumarswamy-js](https://linkedin.com/in/kumarswamy-js)
+- GitHub: [yourusername](https://github.com/kumarswamyJS)  
+
 
 Feel free to reach out via the contact form in the app!
