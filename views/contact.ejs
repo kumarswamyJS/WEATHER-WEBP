@@ -41,57 +41,7 @@
     <%- include('partials/footer') %>
   </div>
 
-  <script>
-const form = document.getElementById("contactForm");
-const popup = document.getElementById("message-popup");
-const contactContent = document.querySelector(".contact-content");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-
-  contactContent.classList.add("loading");
-
-  try {
-    const res = await fetch("/email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    const result = await res.json();
-
-    if (result.success) {
-      showPopup("✅ Mail sent successfully!", "success");
-      form.reset();
-    } else {
-      showPopup("❌ Failed to send mail. Try again.", "error");
-    }
-  } catch (err) {
-    showPopup("⚠️ Server error. Please try again later.", "error");
-  } finally {
-
-    contactContent.classList.remove("loading");
-  }
-});
-
-function showPopup(message, type) {
-  popup.textContent = message;
-  popup.className = type === "success" ? "popup success" : "popup error";
-
-  setTimeout(() => {
-    popup.style.opacity = "0";
-    setTimeout(() => {
-      popup.textContent = "";
-      popup.className = "hidden";
-      popup.style.opacity = "1";
-    }, 500);
-  }, 3000);
-}
-
-  </script>
   <script src="style/style.js"></script>
 </body>
 </html>
