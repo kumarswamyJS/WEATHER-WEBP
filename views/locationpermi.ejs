@@ -1,0 +1,64 @@
+<%- include("partials/header") %>
+<body>
+    <div class="container">
+        
+        <main>
+            <div class="permission-card">
+                <div class="location-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                
+                <h1>Location Access Required</h1>
+                <p>To provide accurate weather information for your area, we need access to your location. Your data remains private and is only used to display relevant weather conditions.</p>
+                
+                
+                <div class="info-note">
+                    <p><i class="fas fa-info-circle"></i> You can change this permission later in your browser settings. Without location access, you'll need to manually enter your location.</p>
+                </div>
+            </div>
+        </main>
+        
+         <%- include('partials/footer') %>
+         
+        <form action="location" method="post" id="location">
+            <input type="hidden" id="lon" value="" name="lon"/>
+            <input type="hidden" id="lat" value="" name="lat"/>
+        </form>
+    </div>
+<script src="style/style.js"></script>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      document.getElementById("location").innerHTML = "Geolocation not supported.";
+    }
+  });
+
+  function showPosition(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    document.getElementById("lon").value = lon;
+    document.getElementById("lat").value = lat;
+
+    // ✅ Add blur before submitting
+    document.querySelector(".container").classList.add("loading");
+
+    let form = document.getElementById("location");
+    form.submit(); 
+  }
+
+  function showError(error) {
+    const messages = {
+      1: "Permission denied.",
+      2: "Location unavailable.",
+      3: "Request timed out."
+    };
+    alert(messages[error.code] || "Unknown error.");
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<%- include("partials/header") %>
+<body>
+    <div class="container">
+        <header>
+            <%- include("partials/logo.ejs") %>
+            <div class="header-right">
+                 <div class="search-container">
+
+                        <form action="locationcity" method="post">
+                            <input type="text" class="search-input" placeholder="Search city..." id="city-search" name="city" autocomplete="off">
+                        </form>
+
+                        <i class="fas fa-search search-icon"></i>
+                        <div class="search-suggestions" id="search-suggestions"></div>
+                    </div>
+                <nav class="top-nav">
+                    <a href="contactme"><i class="fas fa-envelope"></i> Contact me</a>
+                    <a href="aboutme"><i class="fas fa-user"></i> About me</a>
+                    <a href="https://www.weatherapi.com/"><i class="fas fa-code"></i> API</a>
+                </nav>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round">
+                        <span class="light-text">Light</span>
+                        <span class="dark-text">Dark</span>
+                    </span>
+                </label>
+            </div>
+        </header>
+        
+        <main>
+            <div class="weather-card">
+                <div class="current-weather">
+                    <div class="temperature"> <%= Ctemp %>°C</div>
+                    <div class="condition"></div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><%= Clocatin %></span>
+                    </div>
+                </div>
+                
+                <div class="greeting">
+                        <% if (hour >= 5 && hour < 12) { %>
+                            <h1>☀️  Morning!</h1>
+                        <% } else if (hour >= 12 && hour < 17) { %>
+                            <h1>🌤️Good Afternoon!</h1>
+                        <% } else if (hour >= 17 && hour < 21) { %>
+                            <h1>🌇Good Evening!</h1>
+                        <% } else { %>
+                            <h1>🌙Good Night!</h1>
+                        <% } %>
+                </div>
+
+                
+                <div class="weather-details">
+                    <div class="detail-card">
+                        <i class="fas fa-temperature-low"></i>
+                        <h3>MIN</h3>
+                        <p><%= min %>°C</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-temperature-high"></i>
+                        <h3>MAX</h3>
+                        <p><%= max %>°C</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-wind"></i>
+                        <h3>WIND SPEED</h3>
+                        <p><%= windspeed %>kpm</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-cloud-rain"></i>
+                        <h3>RAIN CHANCE</h3>
+                        <p><%= rainchance %>%</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-tint"></i>
+                        <h3>HUMIDITY</h3>
+                        <p><%= humidity %>%</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>UV INDEX</h3>
+                        <p><%= uv %></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="astronomy">
+                <div class="sun-info">
+                    <div class="icon-container">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="time-container">
+                        <h3>SUNRISE</h3>
+                        <p><%= sunrise %></p>
+                    </div>
+                    <div class="time-container">
+                        <h3>SUNSET</h3>
+                        <p><%= sunset %></p>
+                    </div>
+                </div>
+                
+                <div class="moon-info">
+                    <div class="icon-container">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="time-container">
+                        <h3>MOONRISE</h3>
+                        <p><%= moonrise %></p>
+                    </div>
+                    <div class="time-container">
+                        <h3>MOONSET</h3>
+                        <p><%= moonset %></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 6-Day Forecast Section -->
+            <div class="forecast">
+                <h2>6-Day Forecast</h2>
+                <div class="forecast-cards">
+                <% for( let index = 2; index < sixday.length; index++ ) { %>
+                    <div class="forecast-card">
+                        <div class="forecast-day"><%= sixday[index].date %></div>
+                        <div class="forecast-icon">
+                                    <% if (sixday[index].day.condition.code === 1000) { %> 
+                                        <i class="fas fa-sun"></i>
+                                    <% } else if (sixday[index].day.condition.code === 1003) { %> 
+                                        <i class="fas fa-cloud-sun"></i>
+                                    <% } else if ([1006, 1009].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-cloud"></i>
+                                    <% } else if ([1030, 1135].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-smog"></i>
+                                    <% } else if ([1063, 1180, 1183, 1240].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-cloud-rain"></i>
+                                    <% } else if ([1186, 1189, 1192, 1195, 1243, 1246].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-cloud-showers-heavy"></i>
+                                    <% } else if ([1066, 1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-snowflake"></i>
+                                    <% } else if ([1069, 1204, 1207, 1249, 1252].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-cloud-meatball"></i>
+                                    <% } else if ([1072, 1147, 1168, 1171, 1198, 1201].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-temperature-low"></i>
+                                    <% } else if ([1087, 1273, 1276, 1279, 1282].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-bolt"></i>
+                                    <% } else if (sixday[index].day.condition.code === 1114) { %> 
+                                        <i class="fas fa-wind"></i>
+                                    <% } else if (sixday[index].day.condition.code === 1117) { %> 
+                                        <i class="fas fa-snowflake"></i>
+                                    <% } else if ([1237, 1261, 1264].includes(sixday[index].day.condition.code)) { %> 
+                                        <i class="fas fa-poo-storm"></i>
+                                    <% } else { %> 
+                                        <i class="fas fa-question-circle"></i>
+                                    <% } %>
+                                    
+                        </div>
+                        <div class="forecast-temp"><%= sixday[index].day.avgtemp_c %>°C</div>
+                        <div class="forecast-rain">
+                            <i class="fas fa-tint"></i>
+                            <span><%= sixday[index].day.daily_chance_of_rain %>%</span>
+                        </div>
+                        <div class="forecast-desc"><%= sixday[index].day.condition.text %></div>
+                    </div>
+                <% } %>
+                    
+                </div>
+            </div>
+        </main>
+
+        <%- include('partials/footer') %>
+    </div>
+     <script src="style/style.js"></script>
+</body>
+</html>

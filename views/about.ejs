@@ -1,0 +1,105 @@
+<%- include("partials/header") %>
+<body>
+    <div class="container">
+        <header>
+            <%- include("partials/logo.ejs") %>
+            <div class="header-right">
+                <nav class="top-nav">
+                    <a href="home">< Back</a>
+                    <a href="contactme"><i class="fas fa-envelope"></i> Contact me</a>
+                    <a href="https://www.weatherapi.com/"><i class="fas fa-code"></i> API</a>
+                </nav>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round">
+                        <span class="light-text">Light</span>
+                        <span class="dark-text">Dark</span>
+                    </span>
+                </label>
+            </div>
+        </header>
+        
+        <main>
+            <div class="about-content">
+                <div class="profile-header">
+                    <h1>Kumarswamy JS</h1>
+                    <h2>Electronics & Communication Engineering Student</h2>
+                </div>
+                
+                <div class="about-section">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <div class="education-item">
+                        <div class="education-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="education-content">
+                            <h4>New Horizon College of Engineering</h4>
+                            <p>Bachelor of Engineering in Electronics and Communication</p>
+                            <p class="year">2022 - Present (Second Year)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="education-item">
+                        <div class="education-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="education-content">
+                            <h4>CSR Academy, Bengaluru</h4>
+                            <p>Pre-University Studies</p>
+                            <p class="year">Physics, Chemistry, Mathematics</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="about-section">
+                    <h3><i class="fas fa-code"></i> Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <i class="fab fa-html5"></i>
+                            <h4>HTML</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-css3-alt"></i>
+                            <h4>CSS</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-js-square"></i>
+                            <h4>JavaScript</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-react"></i>
+                            <h4>React</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-node-js"></i>
+                            <h4>Node.js</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-python"></i>
+                            <h4>Python</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-copyright"></i>
+                            <h4>C++</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-section">
+                    <h3><i class="fas fa-book-open"></i> About Me</h3>
+                    <p>I am Kumarswamy JS, a second-year Electronics and Communication Engineering student at New Horizon College of Engineering. My coursework has given me a solid grounding in circuits, digital systems, and signal processing, while Angela Yu's Web Development courses on Udemy helped me master HTML, CSS, JavaScript, React, and Node.js for crafting modern, responsive applications.</p>
+                    
+                    <p>I also possess a foundational understanding of Python and C. Prior to college, I attended Don Bosco School (CTA) and completed my Pre-University studies at CSR Academy in Bengaluru, where I honed my analytical skills in Physics, Chemistry, and Mathematics.</p>
+                    
+                    <p>Driven by curiosity and hands-on coding, I'm always seeking new challenges to expand my expertise and deliver innovative solutions.</p>
+                </div>
+            </div>
+        </main>
+        
+        <%- include('partials/footer') %>
+
+    </div>
+    <script src="style/style.js"></script>
+</body>
+</html>

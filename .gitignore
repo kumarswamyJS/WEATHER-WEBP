@@ -1,0 +1,22 @@
+# Ignore all log files
+*.log
+
+# Ignore the 'temp' and 'build' directories
+temp/
+build/
+
+# Ignore specific config files
+.env
+config.local.js
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore IDE-specific files and folders
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore node modules and other dependencies
+node_modules/

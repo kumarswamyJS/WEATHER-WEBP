@@ -1,0 +1,97 @@
+<%- include("partials/header") %>
+<body>
+  <div class="containercontact">
+    <header>
+      <%- include("partials/logo.ejs") %>
+      <div class="header-right">
+        <nav class="top-nav">
+          <a href="home">< Back</a>
+          <a href="aboutme"><i class="fas fa-user"></i> About me</a>
+          <a href="https://www.weatherapi.com/"><i class="fas fa-code"></i> API</a>
+        </nav>
+        <label class="theme-switch">
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider round">
+            <span class="light-text">Light</span>
+            <span class="dark-text">Dark</span>
+          </span>
+        </label>
+      </div>
+    </header>
+
+    <main>
+      <div class="contact-content">
+        <h2>Contact Me</h2>
+        <div class="contact-info">
+          <p><i class="fas fa-envelope"></i> Email: </p>
+        </div>
+
+        <!-- ✅ Message container -->
+        <div id="message-popup" class="hidden"></div>
+
+        <form id="contactForm" action="/email" method="post">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea rows="5" name="message" placeholder="Your Message" autocomplete="off" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </main>
+
+    <%- include('partials/footer') %>
+  </div>
+
+  <script>
+const form = document.getElementById("contactForm");
+const popup = document.getElementById("message-popup");
+const contactContent = document.querySelector(".contact-content");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  contactContent.classList.add("loading");
+
+  try {
+    const res = await fetch("/email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      showPopup("✅ Mail sent successfully!", "success");
+      form.reset();
+    } else {
+      showPopup("❌ Failed to send mail. Try again.", "error");
+    }
+  } catch (err) {
+    showPopup("⚠️ Server error. Please try again later.", "error");
+  } finally {
+
+    contactContent.classList.remove("loading");
+  }
+});
+
+function showPopup(message, type) {
+  popup.textContent = message;
+  popup.className = type === "success" ? "popup success" : "popup error";
+
+  setTimeout(() => {
+    popup.style.opacity = "0";
+    setTimeout(() => {
+      popup.textContent = "";
+      popup.className = "hidden";
+      popup.style.opacity = "1";
+    }, 500);
+  }, 3000);
+}
+
+  </script>
+  <script src="style/style.js"></script>
+</body>
+</html>
