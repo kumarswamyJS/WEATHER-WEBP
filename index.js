@@ -91,7 +91,7 @@ app.post("/locationcity", async (req, res) => {
   let citydata = dataAPI.data;
   let time = citydata.location.localtime;
 
-  res.render("index.ejs", {
+  ~res.render("index.ejs", {
     Ctemp: citydata.current.temp_c,
     Clocatin: citydata.location.name + " " + citydata.location.region,
     min: citydata.forecast.forecastday[0].day.mintemp_c,
