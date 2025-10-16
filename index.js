@@ -21,9 +21,6 @@ app.get("/aboutme", (req, res) => {
   res.render("about.ejs");
 });
 
-app.get("/contactme", (req, res) => {
-  res.render("contact.ejs");
-});
 
 app.get("/home", async (req, res) => {
   if (!data || !data.location) {
@@ -110,33 +107,7 @@ app.post("/locationcity", async (req, res) => {
 });
 
 // POST /email
-app.post("/email", async (req, res) => {
-  const { name, email, message } = req.body;
 
-  try {
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PERSONAL_EMAIL,
-      },
-    });
-
-    let mailOptions = {
-      from: email,
-      to: process.env.EMAIL,
-      subject: `New Message from ${name} — Weather Project`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-    };
-
-    await transporter.sendMail(mailOptions);
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error("❌ Mail Error:", error);
-    res.json({ success: false });
-  }
-});
 
 app.listen(port, () => {
   console.log(`Server running on port ${process.env.BASE_URL}`);
