@@ -432,21 +432,7 @@ if (form && popup && contactContent) {
     }
   });
 
-  function showPopup(message, type) {
-    popup.textContent = message;
-    popup.className = type === "success" ? "popup success" : "popup error";
-    popup.setAttribute("role", "alert"); // ARIA for accessibility
 
-    setTimeout(() => {
-      popup.style.opacity = "0";
-      setTimeout(() => {
-        popup.textContent = "";
-        popup.className = "hidden";
-        popup.style.opacity = "1";
-      }, 500);
-    }, 3000);
-  }
-}
 
 // Geolocation (for location permission page)
 window.addEventListener("DOMContentLoaded", () => {
