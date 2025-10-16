@@ -464,3 +464,19 @@ window.addEventListener("DOMContentLoaded", () => {
     alert(messages[error.code] || "Unknown error.");
   }
 });
+
+  function showPopup(message, type) {
+    popup.textContent = message;
+    popup.className = type === "success" ? "popup success" : "popup error";
+    popup.setAttribute("role", "alert"); 
+
+    setTimeout(() => {
+      popup.style.opacity = "0";
+      setTimeout(() => {
+        popup.textContent = "";
+        popup.className = "hidden";
+        popup.style.opacity = "1";
+      }, 500);
+    }, 3000);
+  }
+}
